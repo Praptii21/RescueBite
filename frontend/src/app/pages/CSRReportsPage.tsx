@@ -5,11 +5,12 @@ import {
   FileText, Download, Share2, ShieldCheck, TrendingUp, History,
   Printer, Leaf, Users2, Award, Package, CheckCircle2, Loader2
 } from 'lucide-react';
+import { getDonorImpact } from '@/app/services/api';
 
 // ─── Report data (replace with Firestore live queries) ────────────────────────
 
-const COMPANY = 'Google Bangalore';
-const REPORT_MONTH = 'April 2026';
+const company = 'Google Bangalore';
+const month = 'April 2026';
 
 const IMPACT = {
   totalMeals:         4780,
@@ -22,7 +23,7 @@ const IMPACT = {
   ngoPartners:        5,
 };
 
-const DONATION_LOG = [
+const log = [
   { date: 'Apr 02, 2026', event: 'All-Hands Meeting', portions: 220, ngo: 'Hope Shelter', volunteer: 'Arjun Kumar', status: 'Delivered' },
   { date: 'Apr 09, 2026', event: 'All-Hands Meeting', portions: 248, ngo: 'Akshaya Patra', volunteer: 'Priya S.',    status: 'Delivered' },
   { date: 'Apr 12, 2026', event: 'Investor Lunch',    portions: 90,  ngo: 'Feeding India', volunteer: 'Ravi M.',    status: 'Delivered' },
@@ -47,12 +48,12 @@ function PrintableReport() {
       <div className="border-b-4 border-emerald-600 pb-6 mb-8">
         <div className="flex justify-between items-start">
           <div>
-            <h1 className="text-3xl font-black text-gray-900">{COMPANY}</h1>
+            <h1 className="text-3xl font-black text-gray-900">{company}</h1>
             <h2 className="text-xl font-semibold text-emerald-700 mt-1">Monthly CSR Impact Report</h2>
-            <p className="text-gray-500 mt-1">{REPORT_MONTH} · Certified by RescueBite Food Rescue</p>
+            <p className="text-gray-500 mt-1">{month} · Certified by RescueBite Food Rescue</p>
           </div>
           <div className="text-right">
-            <div className="text-4xl font-black text-emerald-600">{IMPACT.totalMeals.toLocaleString()}</div>
+            <div className="text-4xl font-black text-emerald-600">{impact.totalMeals.toLocaleString()}</div>
             <div className="text-sm text-gray-500">meals rescued this month</div>
           </div>
         </div>
@@ -61,13 +62,13 @@ function PrintableReport() {
       {/* Impact stats grid */}
       <div className="grid grid-cols-4 gap-4 mb-8">
         {[
-          { label: 'Total donations',      value: IMPACT.totalDonations          },
-          { label: 'Weight (kg)',          value: `${IMPACT.totalWeightKg} kg`    },
-          { label: 'CO₂ saved',            value: `${IMPACT.co2Kg.toLocaleString()} kg` },
-          { label: 'Beneficiaries',        value: IMPACT.beneficiaries.toLocaleString() },
-          { label: 'NGO Partners',         value: IMPACT.ngoPartners             },
-          { label: 'Volunteers engaged',   value: IMPACT.volunteersEngaged       },
-          { label: 'Avg pickup time',      value: `${IMPACT.avgPickupMins} min`  },
+          { label: 'Total donations',      value: impact.totalDonations          },
+          { label: 'Weight (kg)',          value: `${impact.totalWeightKg} kg`    },
+          { label: 'CO₂ saved',            value: `${impact.co2Kg.toLocaleString()} kg` },
+          { label: 'Beneficiaries',        value: impact.beneficiaries.toLocaleString() },
+          { label: 'NGO Partners',         value: impact.ngoPartners             },
+          { label: 'Volunteers engaged',   value: impact.volunteersEngaged       },
+          { label: 'Avg pickup time',      value: `${impact.avgPickupMins} min`  },
           { label: 'Waste diversion rate', value: '94.2%'                        },
         ].map((s, i) => (
           <div key={i} className="border border-gray-200 rounded-lg p-3">
@@ -88,7 +89,7 @@ function PrintableReport() {
           </tr>
         </thead>
         <tbody>
-          {DONATION_LOG.map((row, i) => (
+          {log.map((row, i) => (
             <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
               <td className="p-2 border border-gray-200 text-xs">{row.date}</td>
               <td className="p-2 border border-gray-200 text-xs font-medium">{row.event}</td>
@@ -131,6 +132,34 @@ function PrintableReport() {
 
 export function CSRReportsPage() {
   const [generating, setGenerating] = useState(false);
+  const [reportData, setReportData] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  React.useEffect(() => {
+    const loadData = async () => {
+      try {
+        const data = await getDonorImpact('google_bangalore');
+        setReportData(data);
+      } catch (err) {
+        console.error("Failed to load CSR data", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadData();
+  }, []);
+
+  const impact = reportData?.impact || IMPACT;
+  const company = reportData?.company || company;
+  const month = reportData?.report_month || month;
+  const log = reportData?.donation_log || log;
+  const partners = reportData?.top_partners || [
+    { name: 'Hope Shelter',  meals: 1240 },
+    { name: 'Akshaya Patra', meals: 1089 },
+    { name: 'Feeding India', meals: 892  },
+    { name: 'Robin Hood Army', meals: 782 },
+    { name: 'Others',        meals: 777  },
+  ];
 
   const handleGeneratePDF = async () => {
     setGenerating(true);
@@ -186,7 +215,7 @@ export function CSRReportsPage() {
             {generating ? (
               <><Loader2 className="size-4 animate-spin" /> Generating…</>
             ) : (
-              <><Printer className="size-4" /> Download {REPORT_MONTH} Report</>
+              <><Printer className="size-4" /> Download {month} Report</>
             )}
           </button>
         </div>
@@ -198,10 +227,10 @@ export function CSRReportsPage() {
             {/* Impact stat tiles */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {[
-                { label: 'Meals rescued',   value: IMPACT.totalMeals.toLocaleString(),   icon: Package,  accent: 'text-emerald-400', bg: 'bg-emerald-500/10' },
-                { label: 'CO₂ offset',      value: `${IMPACT.co2Kg.toLocaleString()} kg`, icon: Leaf,    accent: 'text-green-400',   bg: 'bg-green-500/10'   },
-                { label: 'Beneficiaries',   value: IMPACT.beneficiaries.toLocaleString(), icon: Users2,  accent: 'text-blue-400',    bg: 'bg-blue-500/10'    },
-                { label: 'Food weight',     value: `${IMPACT.totalWeightKg} kg`,          icon: TrendingUp, accent: 'text-amber-400', bg: 'bg-amber-500/10' },
+                { label: 'Meals rescued',   value: impact.totalMeals.toLocaleString(),   icon: Package,  accent: 'text-emerald-400', bg: 'bg-emerald-500/10' },
+                { label: 'CO₂ offset',      value: `${impact.co2Kg.toLocaleString()} kg`, icon: Leaf,    accent: 'text-green-400',   bg: 'bg-green-500/10'   },
+                { label: 'Beneficiaries',   value: impact.beneficiaries.toLocaleString(), icon: Users2,  accent: 'text-blue-400',    bg: 'bg-blue-500/10'    },
+                { label: 'Food weight',     value: `${impact.totalWeightKg} kg`,          icon: TrendingUp, accent: 'text-amber-400', bg: 'bg-amber-500/10' },
               ].map((s, i) => (
                 <motion.div
                   key={i}
@@ -214,7 +243,7 @@ export function CSRReportsPage() {
                     <s.icon className={`size-4 ${s.accent}`} />
                   </div>
                   <p className="text-xl font-black text-foreground">{s.value}</p>
-                  <p className="text-xs text-muted-foreground mt-0.5">{s.label} · {REPORT_MONTH}</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">{s.label} · {month}</p>
                 </motion.div>
               ))}
             </div>
@@ -237,7 +266,7 @@ export function CSRReportsPage() {
                     </tr>
                   </thead>
                   <tbody>
-                    {DONATION_LOG.map((row, i) => (
+                    {log.map((row, i) => (
                       <tr key={i} className="border-b border-border/30 hover:bg-muted/20 transition-colors">
                         <td className="py-3 pr-4 text-xs text-muted-foreground">{row.date}</td>
                         <td className="py-3 pr-4 text-xs font-medium text-foreground">{row.event}</td>
@@ -321,14 +350,8 @@ export function CSRReportsPage() {
                 <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground">NGO Partners</h3>
               </div>
               <div className="space-y-4">
-                {[
-                  { name: 'Hope Shelter',  meals: 1240 },
-                  { name: 'Akshaya Patra', meals: 1089 },
-                  { name: 'Feeding India', meals: 892  },
-                  { name: 'Robin Hood Army', meals: 782 },
-                  { name: 'Others',        meals: 777  },
-                ].map((ngo, i) => {
-                  const pct = Math.round((ngo.meals / IMPACT.totalMeals) * 100);
+                {partners.map((ngo: any, i: number) => {
+                  const pct = Math.round((ngo.meals / impact.totalMeals) * 100);
                   return (
                     <div key={i}>
                       <div className="flex justify-between text-xs mb-1">
