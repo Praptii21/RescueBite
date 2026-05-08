@@ -48,6 +48,10 @@ The **Admin Dashboard** serves as the brain of the network, providing:
 - **Live Operations Map**: Real-time tracking of all active missions, volunteers, and hotspots.
 - **XAI (Explainable AI) Logs**: Transparent logs showing *why* the AI matched a specific NGO.
 - **Impact Metrics**: Live counters for Meals Rescued, CO2 Saved, and Beneficiaries Fed.
+
+<p align="left">
+  <img src="image.png" width="800" style="border-radius: 6px;" alt="Operations Command Center" />
+</p>
 - **Automatic Reports**: FSSAI-compliant logs generated for every rescue mission.
 
 ---
