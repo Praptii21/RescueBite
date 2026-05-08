@@ -48,11 +48,23 @@ The **Admin Dashboard** serves as the brain of the network, providing:
 - **Live Operations Map**: Real-time tracking of all active missions, volunteers, and hotspots.
 - **XAI (Explainable AI) Logs**: Transparent logs showing *why* the AI matched a specific NGO.
 - **Impact Metrics**: Live counters for Meals Rescued, CO2 Saved, and Beneficiaries Fed.
+- **Automatic Reports**: FSSAI-compliant logs generated for every rescue mission.
 
 <p align="left">
-  <img src="image.png" width="800" style="border-radius: 6px;" alt="Operations Command Center" />
+  <img src="dashboard.png" width="800" style="border-radius: 6px;" alt="Operations Command Center" />
 </p>
-- **Automatic Reports**: FSSAI-compliant logs generated for every rescue mission.
+
+---
+
+## 📈 Corporate Impact & CSR Reporting
+RescueBite provides businesses with comprehensive, FSSAI-compliant reports to track their sustainability impact:
+- **Verified Donation Log**: Track every meal from upload to delivery with proof of impact.
+- **Sustainability Metrics**: Automatically calculate CO2 offset, meals rescued, and total beneficiaries.
+- **Section 80G Eligible**: Generate tax-compliant receipts for corporate donations.
+
+<p align="left">
+  <img src="csr.png" width="800" style="border-radius: 6px;" alt="Corporate Impact & CSR" />
+</p>
 
 ---
 

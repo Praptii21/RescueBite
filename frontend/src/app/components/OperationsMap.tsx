@@ -40,6 +40,7 @@ const MOCK_NGOS = [
   { id: 'm-ngo-5', name: 'Hasiru Dala', location: { latitude: 12.9316, longitude: 77.6146 }, capacity: 200 },
   { id: 'm-ngo-6', name: 'Goonj', location: { latitude: 12.9616, longitude: 77.6446 }, capacity: 600 },
   { id: 'm-ngo-7', name: 'GiveIndia', location: { latitude: 12.9816, longitude: 77.5646 }, capacity: 350 },
+  { id: 'm-ngo-8', name: 'North Bangalore Relief', location: { latitude: 13.055, longitude: 77.615 }, capacity: 450 },
 ];
 
 const MOCK_DONATIONS = [
@@ -50,6 +51,7 @@ const MOCK_DONATIONS = [
   { id: 'm-don-5', food_type: 'Curry & Rice', quantity: 40, location: { latitude: 12.9416, longitude: 77.5646 }, location_name: 'Jayanagar', status: 'PENDING' },
   { id: 'm-don-6', food_type: 'Packed Lunches', quantity: 80, location: { latitude: 13.0016, longitude: 77.5846 }, location_name: 'Malleshwaram', status: 'CLAIMED' },
   { id: 'm-don-7', food_type: 'Dinner Buffet', quantity: 120, location: { latitude: 12.9516, longitude: 77.6946 }, location_name: 'Whitefield', status: 'PENDING' },
+  { id: 'm-don-8', food_type: 'Corporate Buffet', quantity: 150, location: { latitude: 13.045, longitude: 77.620 }, location_name: 'Manyata Tech Park', status: 'PENDING' },
 ];
 
 const MOCK_VOLUNTEERS = [
@@ -60,6 +62,7 @@ const MOCK_VOLUNTEERS = [
   { id: 'm-vol-5', name: 'Vikram D.', current_location: { latitude: 12.9316, longitude: 77.5746 }, status: 'IDLE' },
   { id: 'm-vol-6', name: 'Anita B.', current_location: { latitude: 12.9916, longitude: 77.6046 }, status: 'DELIVERING' },
   { id: 'm-vol-7', name: 'Karthik P.', current_location: { latitude: 12.9616, longitude: 77.6646 }, status: 'EN_ROUTE' },
+  { id: 'm-vol-8', name: 'Suresh M.', current_location: { latitude: 13.050, longitude: 77.618 }, status: 'EN_ROUTE' },
 ];
 
 interface OperationsMapProps {
@@ -169,6 +172,7 @@ export function OperationsMap({ isFullscreen }: OperationsMapProps) {
             [[12.9316, 77.6146], [12.9346, 77.6101]], // NGO 5 to Don 1 (Closest)
             [[12.9616, 77.6446], [12.9756, 77.6001]], // NGO 6 to Don 2 (Closest)
             [[12.9816, 77.5646], [12.9816, 77.5446]], // NGO 7 to Don 4 (Closest)
+            [[13.055, 77.615], [13.045, 77.620]], // NGO 8 to Don 8 (Manyata)
           ];
           
           const route = (mockRoutes[index % mockRoutes.length] || [[12.9716, 77.5946], [12.9716, 77.5946]]) as [number, number][];
