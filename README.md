@@ -1,4 +1,4 @@
-# 🥘 AnnaSetu
+# 🥘 RescueBite
 ### Powered by the `RescueBite AI` Optimization Engine
 
 [![Status](https://img.shields.io/badge/Status-Operational-success?style=for-the-badge&logo=statuspage)](https://github.com/Praptii21/FoodRescue-)
@@ -9,12 +9,12 @@
 
 > **Bridging the gap between surplus and scarcity using an AI-orchestrated logistics network.**
 
-AnnaSetu is not just an app; it is **Community Infrastructure**. It transforms the 74 million tonnes of food wasted annually in India into a real-time, high-velocity rescue mission. Using the **RescueBite AI Engine**, we ensure that surplus food reaches an empty plate within **90 minutes** of being uploaded.
+RescueBite is not just an app; it is **Community Infrastructure**. It transforms the 74 million tonnes of food wasted annually in India into a real-time, high-velocity rescue mission. Using the **RescueBite AI Engine**, we ensure that surplus food reaches an empty plate within **90 minutes** of being uploaded.
 
 ---
 
 ## 🚀 The Core Innovation: RescueBite AI
-At the heart of AnnaSetu is the **RescueBite AI Engine**, a multi-agent system designed for autonomous coordination.
+At the heart of RescueBite is the **RescueBite AI Engine**, a multi-agent system designed for autonomous coordination.
 
 ### 🧠 1. Smart Matching & Prioritization
 Unlike traditional "list-and-call" apps, RescueBite uses a **10-Factor Weighted Heuristic** to match donations.
@@ -33,7 +33,7 @@ Unlike traditional "list-and-call" apps, RescueBite uses a **10-Factor Weighted 
 ---
 
 ## 📱 The 3-Interface Ecosystem
-AnnaSetu provides a seamless experience for the three pillars of food rescue:
+RescueBite provides a seamless experience for the three pillars of food rescue:
 
 | Interface | Primary Goal | Key Features |
 | :--- | :--- | :--- |
@@ -64,21 +64,103 @@ We are targeting **Bengaluru's Tech Corridors** and **Wedding Hubs** as our init
 
 ---
 
-## 🛠️ Technical Stack
+---
 
-### Backend Infrastructure
-- **Core**: Python 3.11 with **FastAPI** for high-performance asynchronous execution.
-- **Database**: **Google Firestore** for real-time document synchronization.
-- **Authentication**: **Firebase Auth** (Phone, Google, Email).
+## 🏗️ System Architecture: Multi-Agent Autonomous Orchestration
 
-### AI & Machine Learning
-- **Vision**: **Gemini 2.5 Flash** for deep food analysis and **YOLOv8** for real-time item detection.
-- **Inference**: **Scikit-Learn & Joblib** for the predictive surplus engine.
+RescueBite operates on a **Decentralized Multi-Agent Intelligence Layer** where individual AI agents handle specific domains of the rescue mission.
 
-### Frontend & Visuals
-- **Web**: **Next.js 14** with **Tailwind CSS** for the Command Center.
-- **Mapping**: **React-Leaflet** for real-time geographic tracking across the city.
-- **Animations**: **Framer Motion** for a premium, alive interface.
+```mermaid
+graph TD
+    subgraph "The Intelligence Layer (RescueBite AI Engine)"
+        MA[Multi-Agent Orchestrator]
+        VA[Vision Intelligence Agent]
+        PA[Predictive Analytics Agent]
+        LG[Logistics Optimization Agent]
+        XA[XAI - Explainability Agent]
+    end
+
+    subgraph "Data & Storage"
+        DB[(Real-time Firestore)]
+        ST[(Cloud Storage)]
+    end
+
+    subgraph "Interfaces"
+        Donor[Donor Mobile App]
+        NGO[NGO Mobile App]
+        Vol[Volunteer Mobile App]
+        Admin[Command Center Web]
+    end
+
+    Donor -->|Upload Photo| ST
+    ST -->|Trigger| VA
+    VA -->|Extract JSON| MA
+    MA -->|Queries Need| DB
+    MA -->|Consults Pattern| PA
+    MA -->|Optimizes Route| LG
+    MA -->|Decision Logs| XA
+    LG -->|FCM Push| Vol
+    LG -->|FCM Push| NGO
+    Admin -->|Listen| DB
+```
+
+### 🧠 The Multi-Agent Ecosystem
+1.  **Vision Intelligence Agent**: Deep analysis of food quality, quantity, and spoilage risk using a combination of **Gemini 2.5 Flash** and custom **Computer Vision** models.
+2.  **Predictive Analytics Agent**: Forecasts surplus hotspots by analyzing historical waste cycles and upcoming community events.
+3.  **Logistics Optimization Agent**: Solves the "Vehicle Routing Problem" (VRP) in real-time, matching the closest volunteer with the highest-priority mission.
+4.  **Explainability (XAI) Agent**: Translates complex mathematical scores into human-readable logs for NGO partners (e.g., *"Matched you because your current demand is high and a volunteer is 2 mins away"*).
+
+---
+
+## 📂 Project Structure
+
+```text
+RescueBite/
+├── backend/                # Intelligence Layer (FastAPI)
+│   ├── app/
+│   │   ├── agents/         # Multi-Agent Logic (Matching, Prediction)
+│   │   ├── core/           # Firebase & ML Initialization
+│   │   ├── services/       # Escalation, Impact & Logic Services
+│   │   ├── main.py         # Primary API Gateway
+│   │   └── seed_data.py    # Multi-factor Synthetic Data Generator
+│   └── ml/
+│       ├── models/         # Trained .joblib & .h5 models
+│       └── training/       # Model training & optimization scripts
+├── frontend/               # Operations Command Center (Next.js)
+│   ├── src/
+│   │   ├── app/
+│   │   │   ├── components/ # Real-time Maps, XAI Logs, Dashboards
+│   │   │   ├── pages/      # Live Ops, Analytics, CSR Reports
+│   │   │   └── services/   # Backend API integration
+│   │   └── styles/         # Glassmorphic CSS design system
+├── mobile/                 # 3-Interface Ecosystem (Kotlin/Jetpack Compose)
+│   ├── app/src/main/java/com/foodRescue/
+│   │   ├── donor/          # Photo-capture & CSR Flow
+│   │   ├── ngo/            # Mission Acceptance & Demand Signal
+│   │   └── volunteer/      # GPS-Tracking & Proof-of-Delivery
+├── shared/                 # Shared schemas & configuration
+└── README.md               # The documentation you are reading
+```
+
+---
+
+## 🛠️ The Intelligence Tech Stack
+
+### 🚀 Backend & Logic
+- **Core Engine**: Python 3.11+ | **FastAPI** (Asynchronous High-Velocity Execution)
+- **Database**: **Google Firestore** (NoSQL Real-time Document Stream)
+- **ML Inference**: **Scikit-Learn** & **Joblib** (Surplus Intelligence Engine)
+- **Computer Vision**: **RescueBite Vision Layer** (Gemini-Flash Orchestrated)
+
+### 🎨 Frontend & Visualization
+- **Command Center**: **Next.js 14** (React) | **Tailwind CSS** (Glassmorphic Theme)
+- **Real-time Mapping**: **React-Leaflet** (Geographic Tracking)
+- **State Management**: **React Hooks** with real-time Firestore listeners
+
+### 📱 Mobile Excellence
+- **Architecture**: **MVVM** with **Kotlin & Jetpack Compose**
+- **Real-time Sync**: **Firebase SDK** for instantaneous mission updates
+- **Notifications**: **FCM** (Firebase Cloud Messaging) for volunteer dispatch
 
 ---
 
