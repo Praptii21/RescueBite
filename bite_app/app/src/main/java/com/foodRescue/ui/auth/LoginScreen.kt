@@ -49,7 +49,7 @@ fun LoginScreen(onNavigateToHome: (String) -> Unit) {
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                "AnnaSetu AI",
+                "RescueBite AI",
                 style = MaterialTheme.typography.headlineLarge.copy(
                     fontWeight = FontWeight.Bold,
                     letterSpacing = 2.sp,
