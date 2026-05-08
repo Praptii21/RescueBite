@@ -13,6 +13,13 @@ interface Log {
 export function ActivityFeed() {
   const [logs, setLogs] = useState<Log[]>([]);
   const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState<'live' | 'history'>('live');
+  const [historyLogs] = useState<Log[]>([
+    { timestamp: new Date(Date.now() - 1000 * 60 * 60).toISOString(), action: 'Completed', details: 'Akshaya Patra received 52 meals from Manyata', status: 'success' },
+    { timestamp: new Date(Date.now() - 1000 * 60 * 120).toISOString(), action: 'Completed', details: 'Feeding India received 30 meals from MG Road', status: 'success' },
+    { timestamp: new Date(Date.now() - 1000 * 60 * 180).toISOString(), action: 'Completed', details: 'Robin Hood Army received 100 meals from HSR Layout', status: 'success' },
+    { timestamp: new Date(Date.now() - 1000 * 60 * 240).toISOString(), action: 'Completed', details: 'Bangalore Food Bank received 40 meals from Jayanagar', status: 'success' },
+  ]);
 
   useEffect(() => {
     const fetchLogs = async () => {
@@ -57,11 +64,29 @@ export function ActivityFeed() {
   return (
     <div className="bg-card border border-border rounded-xl p-5 h-[600px] flex flex-col shadow-sm">
       <div className="mb-4">
-        <h3 className="text-foreground mb-1 font-semibold">AI Operations Feed</h3>
-        <p className="text-muted-foreground text-sm">Realtime decision log</p>
+        <div className="flex items-center justify-between mb-2">
+          <div>
+            <h3 className="text-foreground font-semibold">AI Operations Feed</h3>
+            <p className="text-muted-foreground text-xs">Realtime decision log</p>
+          </div>
+          <div className="flex gap-1 bg-muted/50 p-0.5 rounded-lg text-xs">
+            <button 
+              onClick={() => setActiveTab('live')}
+              className={`px-2 py-1 rounded-md transition-colors ${activeTab === 'live' ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'}`}
+            >
+              Live
+            </button>
+            <button 
+              onClick={() => setActiveTab('history')}
+              className={`px-2 py-1 rounded-md transition-colors ${activeTab === 'history' ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'}`}
+            >
+              History
+            </button>
+          </div>
+        </div>
       </div>
       <div className="flex-1 overflow-y-auto space-y-2 pr-2 custom-scrollbar">
-        {logs.map((log, index) => {
+        {(activeTab === 'live' ? logs : historyLogs).map((log, index) => {
           const type = log.status || 'info';
           return (
             <motion.div
