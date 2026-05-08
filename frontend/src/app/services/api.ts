@@ -48,3 +48,8 @@ export const getDonations = async () => {
   const response = await api.get('/donations');
   return response.data;
 };
+
+export const getDonorImpact = async (donorId: string) => {
+  const response = await api.get(`/donors/${donorId}/impact`);
+  return response.data;
+};

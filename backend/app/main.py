@@ -30,6 +30,10 @@ def get_metrics():
     """
     return ImpactService.get_dashboard_metrics()
 
+@app.get("/donors/{donor_id}/impact")
+async def get_donor_impact(donor_id: str):
+    return ImpactService.get_donor_impact(donor_id)
+
 @app.post("/donations/{donation_id}/match")
 def trigger_matching(donation_id: str, background_tasks: BackgroundTasks):
     """
