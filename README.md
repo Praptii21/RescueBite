@@ -22,7 +22,7 @@ Unlike traditional "list-and-call" apps, RescueBite uses a **10-Factor Weighted 
 - **Dynamic Splitting**: If a donation of 100 meals arrives and no single NGO can take it, the engine **auto-splits** the load between multiple NGOs in the same second.
 - **Escalation Protocol**: Automatic emergency broadcast if food is within 45 minutes of expiry.
 
-### 👁️ 2. Computer Vision Intelligence (YOLOv8 & Gemini)
+### 👁️ 2. Computer Vision Intelligence (Gemini)
 - **Quality Control**: Automated freshness detection from photos.
 - **Portion Estimation**: AI calculates exact servings (e.g., "60 meals worth of Dal & Rice") to ensure NGOs aren't overwhelmed and food is never wasted at the destination.
 
