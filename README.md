@@ -11,6 +11,14 @@
 
 RescueBite is not just an app; it is **Community Infrastructure**. It transforms the 74 million tonnes of food wasted annually in India into a real-time, high-velocity rescue mission. Using the **RescueBite AI Engine**, we ensure that surplus food reaches an empty plate within **90 minutes** of being uploaded.
 
+APP DEMO
+<img width="405" height="983" alt="WhatsApp Image 2026-05-09 at 12 40 08" src="https://github.com/user-attachments/assets/04e20759-6791-4c11-b693-118703602ce0" />
+<br>
+<img width="423" height="1003" alt="image" src="https://github.com/user-attachments/assets/8eddf0ae-e0ef-4be4-bd2d-eda94bb34a98" />
+<br>
+<img width="424" height="993" alt="image" src="https://github.com/user-attachments/assets/2fe5325f-738b-46b2-b7bc-34a1481b9ced" />
+
+
 ---
 
 ## 🚀 The Core Innovation: RescueBite AI
